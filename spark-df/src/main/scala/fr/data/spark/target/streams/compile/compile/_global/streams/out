@@ -1,0 +1,10 @@
+[0m[[0m[31merror[0m] [0m[0m/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/src/main/scala/fr/data/spark/DataFrame.scala:3:12: object apache is not a member of package org[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.apache.spark.sql.SparkSession[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/src/main/scala/fr/data/spark/DataFrame.scala:4:12: object apache is not a member of package org[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.apache.spark.sql.functions._[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/src/main/scala/fr/data/spark/DataFrame.scala:10:17: not found: value SparkSession[0m
+[0m[[0m[31merror[0m] [0m[0m    val spark = SparkSession.builder().appName("job-1").master("local[2]").getOrCreate[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m

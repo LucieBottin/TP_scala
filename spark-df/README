@@ -1,0 +1,149 @@
+Datasets utilisés :
+Codes postaux - laposte_hesasmal.csv -  https://www.data.gouv.fr/fr/datasets/base-officielle-des-codes-postaux/ 
+Départements français - departement.csv - https://sql.sh/1879-base-donnees-departements-francais
+
+Ouvrez le fichier des codes postaux. 
+Combien de colonnes contient-il ? 6
+Comment ces colonnes sont-elles distribuées ? 
+Quelle sont les types des colonnes du fichier ? string,string,int,string,string,string
+
+
+Lisez le fichier des codes postaux avec Spark et affichez son contenu dans la console. 
++------------------+--------------------+-----------+--------------------+----------------------+--------------------+
+|Code_commune_INSEE|         Nom_commune|Code_postal|             Ligne_5|Libellé_d_acheminement|     coordonnees_gps|
++------------------+--------------------+-----------+--------------------+----------------------+--------------------+
+|             01004|   AMBERIEU EN BUGEY|       1500|                null|     AMBERIEU EN BUGEY|45.9608475114,5.3...|
+|             01008|            AMBUTRIX|       1500|                null|              AMBUTRIX|45.9367134524,5.3...|
+|             01015|     ARBOYS EN BUGEY|       1300|             ST BOIS|       ARBOYS EN BUGEY|45.7237621545,5.6...|
+|             01017|               ARGIS|       1230|                null|                 ARGIS|45.9337182132,5.4...|
+|             01019|               ARMIX|       1510|                null|                 ARMIX|45.8541838459,5.5...|
+|             01022|            ARTEMARE|       1510|                null|              ARTEMARE|45.8695891748,5.6...|
+|             01033|          VALSERHONE|       1200|CHATILLON EN MICH...|            VALSERHONE|46.1067901755,5.8...|
+|             01036|  VALROMEY SUR SERAN|       1260|                VIEU|    VALROMEY SUR SERAN|45.8847475883,5.6...|
+|             01044|             BILLIAT|       1200|                null|               BILLIAT|46.0791346715,5.7...|
+|             01047|               BLYES|       1150|                null|                 BLYES|45.8469686113,5.2...|
+|             01051|             BOLOZON|       1450|                null|               BOLOZON|46.1960338503,5.4...|
+|             01053|     BOURG EN BRESSE|       1000|                null|       BOURG EN BRESSE|46.2051520382,5.2...|
+|             01054| BOURG ST CHRISTOPHE|       1800|              MARFOZ|   BOURG ST CHRISTOPHE|45.8861934456,5.1...|
+|             01064|              BRIORD|       1470|                null|                BRIORD|45.7708330939,5.4...|
+|             01080|  CHAMPDOR CORCELLES|       1110|            CHAMPDOR|    CHAMPDOR CORCELLES|46.0198844188,5.6...|
+|             01084|     CHANOZ CHATENAY|       1400|                null|       CHANOZ CHATENAY|46.1861812234,5.0...|
+|             01090|            CHATENAY|       1320|                null|              CHATENAY|46.0259402155,5.2...|
+|             01093|CHATILLON SUR CHA...|       1400|                null|  CHATILLON SUR CHA...|46.1232390685,4.9...|
+|             01100|  CHEIGNIEU LA BALME|       1510|                null|    CHEIGNIEU LA BALME|45.8227204334,5.6...|
+|             01104|      CHEZERY FORENS|       1200|                null|        CHEZERY FORENS|46.222573373,5.87...|
++------------------+--------------------+-----------+--------------------+----------------------+--------------------+
+
+Questions :
+
+Quel est le schéma du fichier ? 
+root
+ |-- Code_commune_INSEE: string (nullable = true)
+ |-- Nom_commune: string (nullable = true)
+ |-- Code_postal: integer (nullable = true)
+ |-- Ligne_5: string (nullable = true)
+ |-- Libellé_d_acheminement: string (nullable = true)
+ |-- coordonnees_gps: string (nullable = true)
+
+Affichez le nombre de communes.
++---------------------------+
+|count(DISTINCT Nom_commune)|
++---------------------------+
+|                      32772|
++---------------------------+
+
+Affichez le nombre de communes qui possèdent l’attribut Ligne_5
++---------------------------+
+|count(DISTINCT Nom_commune)|
++---------------------------+
+|                       2185|
++---------------------------+
+
+Ajoutez aux données une colonne contenant le numéro de département de la commune. 
++------------------+--------------------+-----------+--------------------+----------------------+--------------------+---------------+
+|Code_commune_INSEE|         Nom_commune|Code_postal|             Ligne_5|Libellé_d_acheminement|     coordonnees_gps|num_departement|
++------------------+--------------------+-----------+--------------------+----------------------+--------------------+---------------+
+|             01004|   AMBERIEU EN BUGEY|       1500|                null|     AMBERIEU EN BUGEY|45.9608475114,5.3...|             01|
+|             01008|            AMBUTRIX|       1500|                null|              AMBUTRIX|45.9367134524,5.3...|             01|
+|             01015|     ARBOYS EN BUGEY|       1300|             ST BOIS|       ARBOYS EN BUGEY|45.7237621545,5.6...|             01|
+|             01017|               ARGIS|       1230|                null|                 ARGIS|45.9337182132,5.4...|             01|
+|             01019|               ARMIX|       1510|                null|                 ARMIX|45.8541838459,5.5...|             01|
+|             01022|            ARTEMARE|       1510|                null|              ARTEMARE|45.8695891748,5.6...|             01|
+|             01033|          VALSERHONE|       1200|CHATILLON EN MICH...|            VALSERHONE|46.1067901755,5.8...|             01|
+|             01036|  VALROMEY SUR SERAN|       1260|                VIEU|    VALROMEY SUR SERAN|45.8847475883,5.6...|             01|
+|             01044|             BILLIAT|       1200|                null|               BILLIAT|46.0791346715,5.7...|             01|
+|             01047|               BLYES|       1150|                null|                 BLYES|45.8469686113,5.2...|             01|
+|             01051|             BOLOZON|       1450|                null|               BOLOZON|46.1960338503,5.4...|             01|
+|             01053|     BOURG EN BRESSE|       1000|                null|       BOURG EN BRESSE|46.2051520382,5.2...|             01|
+|             01054| BOURG ST CHRISTOPHE|       1800|              MARFOZ|   BOURG ST CHRISTOPHE|45.8861934456,5.1...|             01|
+|             01064|              BRIORD|       1470|                null|                BRIORD|45.7708330939,5.4...|             01|
+|             01080|  CHAMPDOR CORCELLES|       1110|            CHAMPDOR|    CHAMPDOR CORCELLES|46.0198844188,5.6...|             01|
+|             01084|     CHANOZ CHATENAY|       1400|                null|       CHANOZ CHATENAY|46.1861812234,5.0...|             01|
+|             01090|            CHATENAY|       1320|                null|              CHATENAY|46.0259402155,5.2...|             01|
+|             01093|CHATILLON SUR CHA...|       1400|                null|  CHATILLON SUR CHA...|46.1232390685,4.9...|             01|
+|             01100|  CHEIGNIEU LA BALME|       1510|                null|    CHEIGNIEU LA BALME|45.8227204334,5.6...|             01|
+|             01104|      CHEZERY FORENS|       1200|                null|        CHEZERY FORENS|46.222573373,5.87...|             01|
++------------------+--------------------+-----------+--------------------+----------------------+--------------------+---------------+
+
+Ecrivez le résultat dans un nouveau fichier CSV nommé “commune_et_departement.csv”, ayant pour colonne Code_commune_INSEE, Nom_commune, Code_postal, departement, ordonné par code postal.
+
++------------------+-------------------+-----------+---------------+
+|Code_commune_INSEE|        Nom_commune|Code_postal|num_departement|
++------------------+-------------------+-----------+---------------+
+|             01344| ST DENIS LES BOURG|       1000|             01|
+|             01053|    BOURG EN BRESSE|       1000|             01|
+|             01053|    BOURG EN BRESSE|       1000|             01|
+|             01258|          MONTCEAUX|       1090|             01|
+|             01165|       FRANCHELEINS|       1090|             01|
+|             01165|       FRANCHELEINS|       1090|             01|
+|             01183|           GUEREINS|       1090|             01|
+|             01225|              LURCY|       1090|             01|
+|             01169|        GENOUILLEUX|       1090|             01|
+|             01263|MONTMERLE SUR SAONE|       1090|             01|
+|             01165|       FRANCHELEINS|       1090|             01|
+|             01031|          BELLIGNAT|       1100|             01|
+|             01283|            OYONNAX|       1100|             01|
+|             01014|             ARBENT|       1100|             01|
+|             01283|            OYONNAX|       1100|             01|
+|             01011|           APREMONT|       1100|             01|
+|             01171|        GEOVREISSET|       1100|             01|
+|             01283|            OYONNAX|       1100|             01|
+|             01237|          MARTIGNAT|       1100|             01|
+|             01181|          GROISSIAT|       1100|             01|
++------------------+-------------------+-----------+---------------+
+
+
+Affichez les communes du département de l’Aisne.
+
++--------------------+---------------+
+|         Nom_commune|num_departement|
++--------------------+---------------+
+|   CHERY LES POUILLY|             02|
+|ROYAUCOURT ET CHA...|             02|
+|CHIVY LES ETOUVELLES|             02|
+|             CHAMBRY|             02|
+|       PARGNY FILAIN|             02|
+|   CLACY ET THIERRET|             02|
+|    MONS EN LAONNOIS|             02|
+|MERLIEUX ET FOUQU...|             02|
+|         CHAILLEVOIS|             02|
+|         MONAMPTEUIL|             02|
+|           CHAVIGNON|             02|
+|        BARENTON CEL|             02|
+|                LAON|             02|
+|           CHEVREGNY|             02|
+|VAUCELLES ET BEFF...|             02|
+|          ETOUVELLES|             02|
+|              FILAIN|             02|
+|               URCEL|             02|
+|   BRAYE EN LAONNOIS|             02|
+|   AULNOIS SOUS LAON|             02|
++--------------------+---------------+
+
+Quel est le département avec le plus de communes ?
+
++---------------+------------------+
+|num_departement|count(Nom_commune)|
++---------------+------------------+
+|             62|               890|
++---------------+------------------+

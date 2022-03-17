@@ -1,0 +1,5 @@
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/src/main/resources/codesPostaux.csv,/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/target/scala-2.13/classes/codesPostaux.csv)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/src/main/resources/log4j.properties,/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/target/scala-2.13/classes/log4j.properties)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/src/main/resources/commune_et_departement.csv/part-00000-5c768e7c-5408-44f6-958b-c139da598a93-c000.csv,/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/target/scala-2.13/classes/commune_et_departement.csv/part-00000-5c768e7c-5408-44f6-958b-c139da598a93-c000.csv)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/src/main/resources/commune_et_departement.csv/_SUCCESS,/mnt/c/Users/lubot/Documents/Workspace/dfTP/spark-df/target/scala-2.13/classes/commune_et_departement.csv/_SUCCESS)[0m
